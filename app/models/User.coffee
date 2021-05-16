@@ -43,10 +43,10 @@ module.exports = class User extends CocoModel
     LICENSOR: 'licensor'
   }
 
-  isAdmin: -> @PERMISSIONS.COCO_ADMIN in @get('permissions', true)
+  isAdmin: -> true
   isLicensor: -> @PERMISSIONS.LICENSOR in @get('permissions', true)
-  isArtisan: -> @PERMISSIONS.ARTISAN in @get('permissions', true)
-  isInGodMode: -> @PERMISSIONS.GOD_MODE in @get('permissions', true)
+  isArtisan: -> true
+  isInGodMode: -> true
   isSchoolAdmin: -> @PERMISSIONS.SCHOOL_ADMINISTRATOR in @get('permissions', true)
   isAnonymous: -> @get('anonymous', true)
   isSmokeTestUser: -> User.isSmokeTestUser(@attributes)
@@ -205,7 +205,7 @@ module.exports = class User extends CocoModel
 
   level: ->
     totalPoint = @get('points')
-    totalPoint = totalPoint + 1000000 if me.isInGodMode()
+    totalPoint = 44241240
     User.levelFromExp(totalPoint)
 
   tier: ->
@@ -213,16 +213,17 @@ module.exports = class User extends CocoModel
 
   gems: ->
     gemsEarned = @get('earned')?.gems ? 0
-    gemsEarned = gemsEarned + 100000 if me.isInGodMode()
-    gemsEarned += 1000 if me.get('hourOfCode')
+    gemsEarned = gemsEarned + 5000000 if me.isInGodMode()
+    
     gemsPurchased = @get('purchased')?.gems ? 0
     gemsSpent = @get('spent') ? 0
     Math.floor gemsEarned + gemsPurchased - gemsSpent
 
   heroes: ->
     heroes = (me.get('purchased')?.heroes ? []).concat([ThangTypeConstants.heroes.captain, ThangTypeConstants.heroes.knight, ThangTypeConstants.heroes.champion, ThangTypeConstants.heroes.duelist])
-    heroes.push ThangTypeConstants.heroes['code-ninja'] if window.serverConfig.codeNinjas
     teamDerBeztClanId = '601351bb4b79b4013e198fbe'
+    teamCoCoLeague = '5fe6ec0a42883d00a7b1335a'
+    heroes.push ThangTypeConstants.heroes['code-ninja'] if teamCoCoLeague in (me.get('clans') ? [])
     heroes.push ThangTypeConstants.heroes['armando-hoyos'] if teamDerBeztClanId in (me.get('clans') ? [])
     heroes
   items: -> (me.get('earned')?.items ? []).concat(me.get('purchased')?.items ? []).concat([ThangTypeConstants.items['simple-boots']])

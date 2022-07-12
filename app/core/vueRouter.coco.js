@@ -101,7 +101,7 @@ export default function getVueRouter () {
           component: () => import(/* webpackChunkName: "teachers" */ 'app/views/teachers/teacher-dashboard/BaseResourceHub/index.vue'),
         },
         {
-          path: '/library',
+          path: '/libraries',
           component: () => import(/* webpackChunkName: "libraryMain" */ 'app/views/library/LibraryMainView')
         },
         {

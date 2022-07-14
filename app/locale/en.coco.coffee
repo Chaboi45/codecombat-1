@@ -1249,6 +1249,7 @@ module.exports = nativeDescription: "English", englishDescription: "English", tr
     community_title: "...and our open-source community"
     lgd_title: "Lead Game Designer"
     oa_title: "Operations Associate"
+    pe_title: "Principal Engineer"
     ac_title: "Administrative Coordinator"
     ea_title: "Executive Assistant"
     om_title: "Operations Manager"
